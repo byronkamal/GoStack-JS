@@ -1,13 +1,25 @@
 const express = require("express");
+const nunjucks = require("nunjucks");
 
 const app = express();
 
-app.get('/', (req, res) => {
-  return res.send('Hello World');
-})
+nunjucks.configure('views', {
+  autoescape: true,
+  express: app,
+  watch: true,
+});
 
-app.get('/nome/:name', (req, res) => {
-  return res.send(`Welcome, ${req.params.name}`);
+
+app.set("view engine", "njk");
+
+const users = ["Byron Kamal", "Joao Silva", "Maria"];
+
+app.get('/', (req, res) => {
+  return res.render("list", { users });
+});
+
+app.get('/new', (req, res) => {
+  return res.render('new');
 });
 
 app.listen(3000);
