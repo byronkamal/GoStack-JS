@@ -17,7 +17,7 @@ class SessionController {
 
     if (!(await user.checkPassword(password))) {
       console.log('Senha incorreta!')
-      res.redirect('/')
+      return res.redirect('/')
     }
 
     return res.redirect('/app/dashboard')
