@@ -3,10 +3,12 @@ const session = require('express-session')
 const FileStore = require('session-file-store')(session)
 const nunjucks = require('nunjucks')
 const path = require('path')
+const flash = require('connect-flash')
 
 class App {
   constructor () {
     this.express = express()
+    this.express.use(flash())
     this.isDev = process.env.NODE_ENV
 
     this.middlewares()
